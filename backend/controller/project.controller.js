@@ -11,6 +11,7 @@ exports.getProject = asyncHandler(async (req, res, next) => {
 
   // Query the ProjectModel with pagination
   const projects = await ProjectModel.find({ userId })
+    .sort({ createdAt: -1 })
     .skip(skipDocs)
     .limit(limit);
 

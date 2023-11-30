@@ -4,8 +4,10 @@ import home from "../../public/assets/svg/home.svg";
 import CreateNewProjectBtn from "./CreateNewProjectBtn";
 import CreateProjectModal from "./CreateProjectModal";
 import LoginModal from "./LoginModal";
+import { useAuthStore } from "@/store/auth";
 
-const HomeComponent = ({openModal, isModalOpen, onClose}) => {
+const HomeComponent = ({ openModal, isModalOpen, onClose }) => {
+  const { auth } = useAuthStore((state) => state);
   return (
     <section>
       <div
@@ -32,9 +34,9 @@ const HomeComponent = ({openModal, isModalOpen, onClose}) => {
       </p>
 
       <CreateNewProjectBtn openModal={openModal} />
-
-      {isModalOpen && <CreateProjectModal onClose={onClose} />}
-      {/* {isModalOpen && <LoginModal isOpen={openModal} onClose={onClose} />} */}
+      {auth
+        ? isModalOpen && <CreateProjectModal onClose={onClose} />
+        : isModalOpen && <LoginModal isOpen={openModal} onClose={onClose} />}
     </section>
   );
 };

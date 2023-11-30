@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import logoIcon from "../../public/assets/svg/logo-icon.svg";
+import settings2 from "../../public/assets/svg/settings2.svg";
 
 const navigation = [
   { id: 1, title: "Projects", href: "/project" },
@@ -39,6 +40,19 @@ export default function Sidebar() {
           ))}
         </ol>
       </nav>
+
+      <div className="border-t border-gray-400 mt-[16rem]">
+
+      </div>
+
+      <div className="flex items-center gap-2 mt-[1rem] p-3 rounded-3xl hover:bg-[#1D1B2014] cursor-pointer active:bg-primary active:text-white">
+        <div>
+          <Image src={settings2} alt="Settings" />
+        </div>
+        <div>
+          Settings
+        </div>
+      </div>
     </div>
   );
 }
