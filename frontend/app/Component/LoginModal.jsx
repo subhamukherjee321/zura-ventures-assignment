@@ -33,7 +33,8 @@ const LoginModal = ({ isOpen, onClose }) => {
       .then((res) => {
         if (res?.data) {
           setAuth(res?.data);
-          typeof window !== "undefined" && localStorage.setItem("zura-store", JSON.stringify(res?.data));
+          typeof window !== "undefined" &&
+            localStorage.setItem("zura-store", JSON.stringify(res?.data));
         }
         setIsLoading(false);
         onClose();

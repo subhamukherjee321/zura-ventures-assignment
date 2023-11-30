@@ -2,6 +2,7 @@ import { useState } from "react";
 import BackToHomeBtn from "./BackToHomeBtn";
 import CreateNewProjectBtn from "./CreateNewProjectBtn";
 import CreateProjectModal from "./CreateProjectModal";
+import Link from "next/link";
 
 const HomeProjects = ({
   isModalOpen,
@@ -58,22 +59,25 @@ const HomeProjects = ({
 
       <div className="grid grid-cols-3 px-[9rem] gap-6">
         {projectData?.map((ele) => (
-          <div
-            key={ele?._id}
-            className="w-[68%] cursor-pointer rounded-md flex justify-center items-center gap-5 p-4 border border-gray-00"
-            style={{ boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}
-          >
-            <div className="text-4xl text-white bg-primary p-4 rounded-md font-bold">
-              {/* {ele?.name.match(/[A-Z]/g).slice(0, 2).join("")} */}SP
-            </div>
-            <div className="text-sm">
-              <div className="text-md text-primary font-bold">{ele?.name}</div>
-              <div className="my-2">{ele?.count} Episodes</div>
-              <div className="text-xs">
-                Last edited a {formatDate(ele?.updatedAt)}
+          <Link href={`/${ele?._id}`} key={ele?._id}>
+            <div
+              className="w-[68%] cursor-pointer rounded-md flex justify-center items-center gap-5 p-4 border border-gray-00"
+              style={{ boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px" }}
+            >
+              <div className="text-4xl text-white bg-primary p-4 rounded-md font-bold">
+                {/* {ele?.name.match(/[A-Z]/g).slice(0, 2).join("")} */}SP
+              </div>
+              <div className="text-sm">
+                <div className="text-md text-primary font-bold">
+                  {ele?.name}
+                </div>
+                <div className="my-2">{ele?.count} Episodes</div>
+                <div className="text-xs">
+                  Last edited a {formatDate(ele?.updatedAt)}
+                </div>
               </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
       <div className=" mt-6 mb-10 flex items-center justify-center">

@@ -7,8 +7,17 @@ import avatar from "../../../public/assets/svg/avatar.svg";
 import downArrow from "../../../public/assets/svg/down-arrow.svg";
 import englishFlag from "../../../public/assets/svg/english-flag.svg";
 import homeIcon from "../../../public/assets/svg/purple-home.svg";
+import { useAuthStore } from "@/store/auth";
+import { useEffect } from "react";
+import notification from "@/app/Component/toast";
+import { makeRequest } from "@/lib/api";
 
+const updateUsername = async (data) => {
+  const res = await makeRequest("PATCH", `/auth/update`, data);
+  return res;
+};
 const page = () => {
+  const { auth, setAuth } = useAuthStore((state) => state);
   const {
     register,
     handleSubmit,
@@ -17,7 +26,36 @@ const page = () => {
     setValue,
     setError,
   } = useForm();
+  console.log("auth", auth);
 
+  useEffect(() => {
+    setValue("username", auth?.username);
+    setValue("email", auth?.email);
+  }, []);
+  const onSubmit = (data) => {
+    const bodyData = {
+      username: data.username,
+    };
+    updateUsername(bodyData)
+      .then((res) => {
+        const value = {
+          ...auth,
+          username: data.username,
+        };
+        setAuth(value);
+        localStorage.setItem("zura-store", JSON.stringify(value));
+        notification("success", "Successfully updated");
+      })
+      .catch((error) => {
+        const err = error?.response?.data?.message;
+        if (err) {
+          notification("error", err);
+        } else {
+          notification("error", "Something wen't wrong");
+        }
+      });
+    console.log("data", data);
+  };
   return (
     <div className="w-full min-h-screen mx-6 px-16">
       <nav className="flex justify-between items-center mt-10 w-full">
@@ -59,14 +97,17 @@ const page = () => {
 
       <h1 className="text-primary text-3xl font-bold mt-4">Account Settings</h1>
 
-      <form className="flex items-center mt-6 gap-8">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex items-center mt-6 gap-8"
+      >
         <div>
-        <div className="border-2 border-blue-500 w-[40%] rounded-full mb-3">
-          <Image src={avatar} alt="User-Avatar" className="w-full" />
-        </div>
-        <div>
+          <div className="border-2 border-blue-500 w-[40%] rounded-full mb-3">
+            <Image src={avatar} alt="User-Avatar" className="w-full" />
+          </div>
+          <div>
             <input type="file" />
-        </div>
+          </div>
         </div>
 
         <div>
@@ -89,13 +130,17 @@ const page = () => {
             placeholder={"Type username"}
             type={"email"}
             required={false}
+            disabled={true}
           />
         </div>
 
         <div>
-            <button className="py-2 px-5 rounded-sm bg-primary text-white font-[500]" type="submit">
-                Save
-            </button>
+          <button
+            className="py-2 px-5 rounded-sm bg-primary text-white font-[500]"
+            type="submit"
+          >
+            Save
+          </button>
         </div>
       </form>
 
