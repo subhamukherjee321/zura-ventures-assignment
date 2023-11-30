@@ -41,7 +41,7 @@ export default function page() {
             </div>
           </div>
         ))}
-        <CreatePodcastModal isOpen={isModalOpen} onClose={closeModal} />
+        
       </div>
 
       <div className="text-[#999999] text-center my-8 text-xl">or</div>
@@ -58,11 +58,12 @@ export default function page() {
           MP4, MOV, MP3, WAV, PDF, DOCX or TXT file{" "}
         </p>
         <div className="flex justify-center">
-          <button className="py-2 px-5 text-sm text-primary font-[500] border border-primary rounded-[7rem] hover:bg-primary hover:text-white active:bg-purple-600">
+          <button className="py-2 px-5 text-sm text-primary font-[500] border border-primary rounded-[7rem] hover:bg-primary hover:text-white active:bg-purple-600" onClick={openModal}>
             Select File
           </button>
         </div>
       </div>
+      <CreatePodcastModal isOpen={isModalOpen} onClose={closeModal} />
     </section>
   );
 }

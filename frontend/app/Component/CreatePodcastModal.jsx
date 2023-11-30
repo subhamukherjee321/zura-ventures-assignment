@@ -27,7 +27,7 @@ const CreatePodcastModal = ({ isOpen, onClose }) => {
     >
       <div className="bg-white rounded-lg p-8 max-w-md w-full">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-lg font-semibold">Upload from Youtube</h2>
+          <h2 className="text-lg font-semibold">Upload</h2>
           <button
             onClick={onClose}
             className="text-gray-500 hover:text-gray-700 focus:outline-none"
