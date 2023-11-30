@@ -15,7 +15,7 @@ export const makeRequest = async (
     timeout: 10000,
   };
 
-  const getUserData = JSON.parse(localStorage.getItem("zura-store")) || null;
+  const getUserData = typeof window !== undefined ? JSON.parse(localStorage.getItem("zura-store")) : null;
   const localToken = getUserData?.token || null;
   if (localToken)
     axiosOptions.headers = {

@@ -1,5 +1,5 @@
 import { create } from "zustand";
-const getUserData = JSON.parse(localStorage.getItem("zura-store")) || null;
+const getUserData = typeof window !== "undefined" ? JSON.parse(localStorage.getItem("zura-store")) : null;
 
 export const useAuthStore = create((set) => ({
   auth: getUserData,
