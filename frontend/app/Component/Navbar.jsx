@@ -1,5 +1,5 @@
 import Image from "next/image";
-import bell from "../../public/assets/svg/bell-icon.svg";
+import bell from "../../public/bell-icon.svg";
 import logo from "../../public/assets/svg/logo-icon.svg";
 import setting from "../../public/assets/svg/settings.svg";
 
