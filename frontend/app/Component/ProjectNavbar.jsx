@@ -1,5 +1,5 @@
 import Image from "next/image";
-import bell from "../../public/assets/svg/bellicon.svg";
+import bell from "../../public/assets/svg/bell-icon.svg";
 import downArrow from "../../public/assets/svg/down-arrow.svg";
 import englishFlag from "../../public/assets/svg/english-flag.svg";
 import homeIcon from "../../public/assets/svg/purple-home.svg";
